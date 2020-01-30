@@ -1,0 +1,32 @@
+.weather-card {
+  display:flex;
+  width: 80%;
+  margin: 5% 10%;
+  border: 1px solid rgba(255,255,255, 0.2);
+  border-radius: 4px;
+}
+
+.weather-card h1 {
+  padding: 5%;
+  font-size: 3vw;
+  width: 40%;
+}
+
+.weather-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #707793;
+  min-height: 100%;
+  width: 60%;
+}
+
+.weather-image {
+  height: 15vh;
+}
+
+.weather-description {
+  font-size: 2vw;
+  text-transform: capitalize;
+  margin-left: 10%;
+}

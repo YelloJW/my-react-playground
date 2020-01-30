@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #3C3F58;
+  color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #3BBA9C;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin:0;
+}
+
+@import './css/_weather_card.css'
