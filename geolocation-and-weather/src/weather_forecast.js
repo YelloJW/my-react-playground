@@ -11,6 +11,15 @@ class WeatherCard extends React.Component {
     }
   }
 
+  configForecast() {
+    if (this.state.forecast) {
+      const forecast = this.state.forecast.map(forecast => <ForecastCard key={forecast.dt} dateTime={forecast.dt} description={forecast.weather[0].description} temperature={forecast.main.temp} icon={forecast.weather[0].icon}/>)
+      return forecast
+    } else {
+      return null
+    }
+  }
+
   getWeatherForecast = () => {
     // console.log(WEATHER_API_KEY)
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.props.lat}&lon=${this.props.lon}&units=metric&appid=${WEATHER_API_KEY}`)
@@ -34,9 +43,11 @@ class WeatherCard extends React.Component {
   }
 
   render(){
-    // const forecast = this.state.forecast.map(forecast => <ForecastCard timeBin={'hello'} description={'hello'} temperature={'hello'} icon={'hello'}/>)
+    const forecast = this.configForecast()
     return (
-      'hello'
+      <div className="forecast-grid">
+      {forecast}
+      </div>
     );
   }
 }
