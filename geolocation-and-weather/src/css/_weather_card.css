@@ -1,18 +1,18 @@
 .weather-card {
   display:flex;
-  width: 80%;
+  width: 45%;
   margin: 5% 10%;
   border: 1px solid rgba(255,255,255, 0.2);
   border-radius: 4px;
 }
 
-.weather-card h1 {
-  padding: 5%;
-  font-size: 3vw;
+.weather-card-title {
+  padding: 3%;
+  font-size: 2vw;
   width: 40%;
 }
 
-.weather-content {
+.weather-card-content {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,11 +21,11 @@
   width: 60%;
 }
 
-.weather-image {
+.weather-card-content-image {
   height: 15vh;
 }
 
-.weather-description {
+.weather-card-content-description {
   font-size: 2vw;
   text-transform: capitalize;
   margin-left: 10%;

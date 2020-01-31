@@ -1,0 +1,28 @@
+.forecast-grid-card {
+  display:flex;
+  flex-direction: column;
+  width: 20%;
+  border: 0px solid rgba(255,255,255, 0.2);
+}
+
+.forecast-grid-card-datetime {
+  font-size: 1.5vw;
+  display:flex;
+  width: 100%;
+  padding: 2% 0%;
+}
+
+.forecast-grid-card-content {
+  width: 98%;
+  height: 100%;
+  font-size: 1.5vw;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  background-color: #707793;
+}
+
+.forecast-grid-card-content img{
+  height: 7vw;
+}
