@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans&display=swap');
+@import './css/_weather_card.css';
+@import './css/_weather_forecast.css';
+@import './css/_weather_forecast_card.css';
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -13,4 +16,4 @@ h1, h2, h3, h4, h5, h6 {
   margin:0;
 }
 
-@import './css/_weather_card.css'
+

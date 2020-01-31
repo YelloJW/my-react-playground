@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WeatherCard from './weather_card'
-import WeatherForecast from './weather_forecast'
+import WeatherCard from './weather_card';
+import WeatherForecast from './weather_forecast';
 
-import './index.css'
+import './index.css';
 
 class App extends React.Component {
   constructor(props){
