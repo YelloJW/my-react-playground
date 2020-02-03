@@ -1,5 +1,5 @@
 import React from 'react'
-import ForecastCard from './weather_forecast_card'
+import ForecastCard from './WeatherForecastCard'
 const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 
