@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Fredoka+One|Open+Sans&display=swap');
+@import './css/App.css';
+@import './css/SearchBar.css';
 @import './css/WeatherCard.css';
 @import './css/WeatherForecast.css';
 @import './css/WeatherForecastCard.css';
