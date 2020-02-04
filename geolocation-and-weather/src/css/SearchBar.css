@@ -22,3 +22,19 @@
   font-style: italic;
   color: rgba(255,255,255,0.5);
 }
+
+.get-current-location-btn {
+  margin-top: 25px;
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 3px;
+  background-color: white;
+  color: gray;
+  transition: 0.5s;
+}
+
+.get-current-location-btn:hover {
+  font-size: 20.5px;
+  padding: 5px 3.5px;
+  color: black;
+}

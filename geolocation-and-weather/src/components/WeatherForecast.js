@@ -46,7 +46,7 @@ class WeatherCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.state.forecast === null && this.props.location === "") {
+    if (this.props.lat !== null && this.state.forecast === null && this.props.location === "") {
       this.getWeatherForecastByCoords()
     }
     if (this.props.location !== prevProps.location) {
@@ -58,7 +58,7 @@ class WeatherCard extends React.Component {
     const forecast = this.configForecast()
     return (
       <div className="forecast-grid">
-      {forecast}
+        {forecast}
       </div>
     );
   }

@@ -15,7 +15,7 @@ class App extends React.Component {
   }
 
   setLocation = (query) => {
-    console.log(query)
+    console.log(`setting location to ${query}`)
     this.setState({
       location: query
     })

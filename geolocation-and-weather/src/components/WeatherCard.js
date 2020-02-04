@@ -45,8 +45,7 @@ class WeatherCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props)
-    if (this.state.location === "" && this.props.location === "") {
+    if (this.props.lat != null && this.state.location === "" && this.props.location === "") {
       this.getWeatherByCoords()
     }
     if (this.props.location !== prevProps.location) {
