@@ -14,7 +14,7 @@ class WeatherCard extends React.Component {
 
   configForecast() {
     if (this.state.forecast) {
-      const forecast = this.state.forecast.map(forecast => <ForecastCard key={forecast.dt} dateTime={forecast.dt} description={forecast.weather[0].description} temperature={forecast.main.temp} icon={forecast.weather[0].icon}/>)
+      const forecast = this.state.forecast.map(({dt, weather, main}) => <ForecastCard key={dt} dateTime={dt} description={weather[0].description} temperature={main.temp} icon={weather[0].icon}/>)
       return forecast
     } else {
       return null
@@ -22,7 +22,7 @@ class WeatherCard extends React.Component {
   }
 
   getWeatherForecastByCoords = () => {
-    console.log('getting forecast by coordinates')
+    // console.log('getting forecast by coordinates')
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.props.lat}&lon=${this.props.lon}&units=metric&appid=${WEATHER_API_KEY}`)
     .then(res => res.json())
     .then(data => {
@@ -34,7 +34,7 @@ class WeatherCard extends React.Component {
   }
 
     getWeatherForecastByLocation = () => {
-    console.log('getting forecast by search location')
+    // console.log('getting forecast by search location')
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.props.location}&units=metric&appid=${WEATHER_API_KEY}`)
     .then(res => res.json())
     .then(data => {
@@ -46,11 +46,13 @@ class WeatherCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.lat !== null && this.state.forecast === null && this.props.location === "") {
-      this.getWeatherForecastByCoords()
-    }
-    if (this.props.location !== prevProps.location) {
-      this.getWeatherForecastByLocation()
+    if (this.props !== prevProps) {
+      if (this.props.lat !== null && this.props.location === "") {
+        this.getWeatherForecastByCoords()
+      }
+      if (this.props.location !== "" && this.props.location !== prevProps.location) {
+        this.getWeatherForecastByLocation()
+      }
     }
   }
 

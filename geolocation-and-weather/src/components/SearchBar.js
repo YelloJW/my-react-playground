@@ -1,6 +1,6 @@
 import React from 'react'
 
-class SearchBar extends React.Component {
+class LocationSettings extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,19 +21,22 @@ class SearchBar extends React.Component {
 
   onClick = () => {
     this.props.setLocation("")
+    this.setState({
+      location: ""
+    })
   }
 
   render() {
     return (
-      <div className="search-bar">
+      <div className="location-settings">
         <h1 className="search-title">Enter location</h1>
         <form onSubmit={this.onSubmit}>
           <input className="search-input" type="text" value={this.state.location} onChange={this.onInputChange} placeholder="Timbuktu"/>
         </form>
-        <button className="get-current-location-btn" onClick={this.onClick}>Current location</button>
+        <button className="current-location-btn" onClick={this.onClick}>Current location</button>
       </div>
     )
   }
 }
 
-export default SearchBar
+export default LocationSettings

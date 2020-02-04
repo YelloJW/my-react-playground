@@ -15,7 +15,7 @@ class WeatherCard extends React.Component {
   }
 
   getWeatherByCoords() {
-    console.log('getting weather by coordinates')
+    // console.log('getting weather by coordinates')
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.props.lat}&lon=${this.props.lon}&units=metric&appid=${WEATHER_API_KEY}`)
     .then(res => res.json())
     .then(data => {
@@ -30,7 +30,7 @@ class WeatherCard extends React.Component {
   }
 
   getWeatherByLocation() {
-    console.log('getting weather by search location')
+    // console.log('getting weather by search location')
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.props.location}&units=metric&appid=${WEATHER_API_KEY}`)
     .then(res => res.json())
     .then(data => {
@@ -45,11 +45,13 @@ class WeatherCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.lat != null && this.state.location === "" && this.props.location === "") {
-      this.getWeatherByCoords()
-    }
-    if (this.props.location !== prevProps.location) {
-      this.getWeatherByLocation()
+    if (this.props !== prevProps) {
+      if (this.props.lat !== null && this.props.location === "") {
+        this.getWeatherByCoords()
+      }
+      if (this.props.location !== "" && this.props.location !== prevProps.location) {
+        this.getWeatherByLocation()
+      }
     }
   }
 

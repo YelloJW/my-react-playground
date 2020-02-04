@@ -7,7 +7,7 @@
 
 .weather-card-title {
   padding: 3%;
-  font-size: 2vw;
+  font-size: 2.5vw;
   width: 40%;
 }
 
@@ -21,11 +21,11 @@
 }
 
 .weather-card-content-image {
-  height: 15vh;
+  height: 15vw;
 }
 
 .weather-card-content-description {
   font-size: 2vw;
   text-transform: capitalize;
-  margin-left: 10%;
+  margin-left: 2%;
 }

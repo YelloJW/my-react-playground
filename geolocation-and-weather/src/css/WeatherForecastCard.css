@@ -7,18 +7,20 @@
 }
 
 .forecast-grid-card-datetime {
-  font-size: 1.3vw;
+  font-size: 1.1vw;
   width: 100%;
   text-align: center;
   padding: 5px 0;
 }
 
 .light-background {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: rgba(60, 63, 88, 1);
 }
 
 .dark-background {
   background-color: rgba(60, 63, 88, 1);
+  color: white;
 }
 
 .forecast-grid-card-content {
