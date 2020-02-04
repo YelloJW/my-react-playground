@@ -1,6 +1,7 @@
 import React from 'react'
 import WeatherCard from './WeatherCard';
 import WeatherForecast from './WeatherForecast';
+import SearchBar from './SearchBar';
 
 class App extends React.Component {
   constructor(props){
@@ -8,8 +9,16 @@ class App extends React.Component {
     this.state = {
       lat: null,
       lon: null,
+      location: "",
       errorMessage: "",
     }
+  }
+
+  setLocation = (query) => {
+    console.log(query)
+    this.setState({
+      location: query
+    })
   }
 
   getCoordinates = () => {
@@ -35,8 +44,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <WeatherCard lat={this.state.lat} lon={this.state.lon}/>
-        <WeatherForecast lat={this.state.lat} lon={this.state.lon}/>
+        <div className="top-container">
+          <WeatherCard lat={this.state.lat} lon={this.state.lon} location={this.state.location}/>
+          <SearchBar setLocation={this.setLocation}/>
+        </div>
+        <WeatherForecast lat={this.state.lat} lon={this.state.lon} location={this.state.location}/>
       </div>
     )
   }
