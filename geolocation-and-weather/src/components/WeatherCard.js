@@ -56,17 +56,18 @@ class WeatherCard extends React.Component {
   }
 
   render(){
+    const {location, icon, description, temperature, errorMessage} = this.state
     return (
       <div className="weather-card">
-        <h1 className="weather-card-title">Todays weather in {this.state.location}</h1>
+        <h1 className="weather-card-title">Todays weather in {location}</h1>
         <div className="weather-card-content">
-          <img className="weather-card-content-image" src={`http://openweathermap.org/img/wn/${this.state.icon}@2x.png`} alt="" />
+          <img className="weather-card-content-image" src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
           <div className="weather-card-content-description">
-            <p>{this.state.description}</p>
-            <p>{Math.round(this.state.temperature)}°C</p>
+            <p>{description}</p>
+            <p>{Math.round(temperature)}°C</p>
           </div>
         </div>
-        <p>{this.state.errorMessage}</p>
+        <p>{errorMessage}</p>
       </div>
     );
   }
