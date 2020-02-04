@@ -7,6 +7,7 @@ class WeatherCard extends React.Component {
   constructor(props){
     super(props)
     this.state = {
+      location:this.props.location,
       forecast: null
     }
   }
@@ -20,25 +21,36 @@ class WeatherCard extends React.Component {
     }
   }
 
-  getWeatherForecast = () => {
-    // console.log(WEATHER_API_KEY)
+  getWeatherForecastByCoords = () => {
+    console.log('getting forecast by coordinates')
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${this.props.lat}&lon=${this.props.lon}&units=metric&appid=${WEATHER_API_KEY}`)
     .then(res => res.json())
     .then(data => {
       this.setState({
         forecast: data.list,
-        // description: data.weather[0].description,
-        // temperature: data.main.temp,
-        // icon: data.weather[0].icon
       })
     })
     .catch(err => console.log(err))
   }
 
-  componentDidUpdate() {
-    if (this.state.forecast === null) {
-      console.log('heeelp')
-      this.getWeatherForecast()
+    getWeatherForecastByLocation = () => {
+    console.log('getting forecast by search location')
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${this.props.location}&units=metric&appid=${WEATHER_API_KEY}`)
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        forecast: data.list,
+      })
+    })
+    .catch(err => console.log(err))
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.state.forecast === null && this.props.location === "") {
+      this.getWeatherForecastByCoords()
+    }
+    if (this.props.location !== prevProps.location) {
+      this.getWeatherForecastByLocation()
     }
   }
 
