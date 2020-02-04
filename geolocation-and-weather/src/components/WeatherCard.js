@@ -1,67 +1,83 @@
-import React from 'react'
+import React from "react";
 const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
-
 class WeatherCard extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       location: this.props.location,
       description: "",
       temperature: null,
       icon: "",
-      errorMessage: "",
-    }
+      errorMessage: ""
+    };
   }
 
   getWeatherByCoords() {
     // console.log('getting weather by coordinates')
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.props.lat}&lon=${this.props.lon}&units=metric&appid=${WEATHER_API_KEY}`)
-    .then(res => res.json())
-    .then(data => {
-      this.setState({
-        location: data.name,
-        description: data.weather[0].description,
-        temperature: data.main.temp,
-        icon: data.weather[0].icon
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${this.props.lat}&lon=${this.props.lon}&units=metric&appid=${WEATHER_API_KEY}`
+    )
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          location: data.name,
+          description: data.weather[0].description,
+          temperature: data.main.temp,
+          icon: data.weather[0].icon
+        });
       })
-    })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
   getWeatherByLocation() {
     // console.log('getting weather by search location')
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.props.location}&units=metric&appid=${WEATHER_API_KEY}`)
-    .then(res => res.json())
-    .then(data => {
-      this.setState({
-        location: data.name,
-        description: data.weather[0].description,
-        temperature: data.main.temp,
-        icon: data.weather[0].icon
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${this.props.location}&units=metric&appid=${WEATHER_API_KEY}`
+    )
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          location: data.name,
+          description: data.weather[0].description,
+          temperature: data.main.temp,
+          icon: data.weather[0].icon
+        });
       })
-    })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       if (this.props.lat !== null && this.props.location === "") {
-        this.getWeatherByCoords()
+        this.getWeatherByCoords();
       }
-      if (this.props.location !== "" && this.props.location !== prevProps.location) {
-        this.getWeatherByLocation()
+      if (
+        this.props.location !== "" &&
+        this.props.location !== prevProps.location
+      ) {
+        this.getWeatherByLocation();
       }
     }
   }
 
-  render(){
-    const {location, icon, description, temperature, errorMessage} = this.state
+  render() {
+    const {
+      location,
+      icon,
+      description,
+      temperature,
+      errorMessage
+    } = this.state;
     return (
       <div className="weather-card">
         <h1 className="weather-card-title">Todays weather in {location}</h1>
         <div className="weather-card-content">
-          <img className="weather-card-content-image" src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
+          <img
+            className="weather-card-content-image"
+            src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+            alt=""
+          />
           <div className="weather-card-content-description">
             <p>{description}</p>
             <p>{Math.round(temperature)}°C</p>
@@ -73,4 +89,4 @@ class WeatherCard extends React.Component {
   }
 }
 
-export default WeatherCard
+export default WeatherCard;

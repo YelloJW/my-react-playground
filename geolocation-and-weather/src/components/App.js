@@ -1,25 +1,25 @@
-import React from 'react'
-import WeatherCard from './WeatherCard';
-import WeatherForecast from './WeatherForecast';
-import SearchBar from './SearchBar';
+import React from "react";
+import WeatherCard from "./WeatherCard";
+import WeatherForecast from "./WeatherForecast";
+import SearchBar from "./SearchBar";
 
 class App extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       lat: null,
       lon: null,
       location: "",
-      errorMessage: "",
-    }
+      errorMessage: ""
+    };
   }
 
-  setLocation = (query) => {
-    console.log(`setting location to ${query}`)
+  setLocation = query => {
+    console.log(`setting location to ${query}`);
     this.setState({
       location: query
-    })
-  }
+    });
+  };
 
   getCoordinates = () => {
     navigator.geolocation.getCurrentPosition(
@@ -34,24 +34,32 @@ class App extends React.Component {
           errorMessage: err.message
         });
       }
-    )
-  }
+    );
+  };
 
   componentDidMount() {
-    this.getCoordinates()
+    this.getCoordinates();
   }
 
   render() {
     return (
       <div>
         <div className="top-container">
-          <WeatherCard lat={this.state.lat} lon={this.state.lon} location={this.state.location}/>
-          <SearchBar setLocation={this.setLocation}/>
+          <WeatherCard
+            lat={this.state.lat}
+            lon={this.state.lon}
+            location={this.state.location}
+          />
+          <SearchBar setLocation={this.setLocation} />
         </div>
-        <WeatherForecast lat={this.state.lat} lon={this.state.lon} location={this.state.location}/>
+        <WeatherForecast
+          lat={this.state.lat}
+          lon={this.state.lon}
+          location={this.state.location}
+        />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;
