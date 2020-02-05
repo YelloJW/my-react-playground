@@ -1,65 +1,57 @@
-import React from 'react'
+import React from 'react';
+import authoriseApp from '../api/StravaAuth'
+import Dashboard from './Dashboard'
+import ActivityList from './ActivityList'
+import SelectedActivity from './SelectedActivity'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      clientId: 43305,
-      clientSecret: 'a7a9536fb9a5d3b4edf9318745c8beb1b6017fcd',
-      code: "",
-      activities: []
+      dashboardStats: [],
+      activities: [],
+      selectedActivityId: null
     }
   }
 
-  getActivityData(accessToken) {
-    fetch(`https://www.strava.com/api/v3/athlete/activities?before=1580839092&after=0&page=1&per_page=50`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-        }
-      }
-    )
-    .then(res => res.json())
-    .then(res => {
-      this.setState({
-        activities: res
-      })
-    })
-  }
-
-  getAuthToken(code) {
-    console.log('Fetching Auth Token with code' + code)
-    fetch(`https://www.strava.com/oauth/token?client_id=${this.state.clientId}&client_secret=${this.state.clientSecret}&code=${code}&grant_type=authorization_code`,
-    {
-      method: 'POST'
-      }
-    )
-    .then(res => res.json())
-    .then(res => {
-      const accessToken = res.access_token
-      console.log('Bearer '+ accessToken)
-      this.getActivityData(accessToken)
-      }
-    )
-    .catch(err => console.log(err))
-  }
-
-  componentDidMount() {
-    const search = window.location.search
-    const params = new URLSearchParams(search);
-    const code = params.get('code')
-    if (!code) {
-      window.location.href = `http://www.strava.com/oauth/authorize?client_id=${this.state.clientId}&response_type=code&redirect_uri=http://localhost:3000/exchange_token&approval_prompt=force&scope=read,read_all,activity:read,activity:read_all`;
-    }
+  selectActivity({id}) {
     this.setState({
-      code: code
+      selectedActivityId: id
     })
-    this.getAuthToken(code)
   }
+
+  async componentDidMount() {
+    const activities = await authoriseApp()
+    this.setState({
+      activities: activities
+      selectedActivity: activities[0].id
+    })
+  }
+
   render() {
+    console.log(this.state.activities)
+    const activities = this.state.activities.map(({type,
+      name,
+      distance,
+      elapsed_time,
+      total_elevation_gain,
+      id,
+      start_date,
+      start_latlng,
+      achievement_count,
+      kudos_count,
+      average_speed}) => {
+      return(
+        <div key={id}>{start_date}{type}{name}{distance}{elapsed_time}{average_speed}{total_elevation_gain}{achievement_count}{kudos_count}</div>
+      )
+    })
+
     return(
-    <div>Hello Strava</div>
+    <div>Hello Strava
+      <Dashboard />
+      <ActivityList activities={this.props.activities} selectActivity={this.selectActivity}/>
+      <SelectedActivity selectedActivityId={this.props.selectedActivityId}/>
+    </div>
     )
   }
 }
