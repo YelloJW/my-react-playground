@@ -20,6 +20,27 @@ class App extends React.Component {
     })
   }
 
+  configActivities() {
+    this.state.activities.map((
+      { type, name, distance, elapsed_time, total_elevation_gain, id, start_date, start_latlng, achievement_count, kudos_count, average_speed }
+    ) => {
+      return(
+        <Activity
+          key={id}
+          startDate={start_date}
+          type={type}
+          name={name}
+          distance={distance}
+          elapsedTime={elapsed_time}
+          averageSpeed={average_speed}
+          totalElevationGain={total_elevation_gain}
+          achievementCount={achievement_count}
+          kudosCount={kudos_count}
+        >
+      )
+    })
+  }
+
   async componentDidMount() {
     const activities = await authoriseApp()
     this.setState({
@@ -29,23 +50,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.activities)
-    const activities = this.state.activities.map(({type,
-      name,
-      distance,
-      elapsed_time,
-      total_elevation_gain,
-      id,
-      start_date,
-      start_latlng,
-      achievement_count,
-      kudos_count,
-      average_speed}) => {
-      return(
-        <div key={id}>{start_date}{type}{name}{distance}{elapsed_time}{average_speed}{total_elevation_gain}{achievement_count}{kudos_count}</div>
-      )
-    })
-
+    const activities = configActivities()
     return(
     <div>Hello Strava
       <Dashboard />
