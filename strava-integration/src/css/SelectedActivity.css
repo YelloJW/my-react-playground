@@ -1,0 +1,37 @@
+.selected-activity {
+  background: rgba(255, 255, 255, 0.7);
+  height: 30vh;
+  overflow-y: scroll;
+  margin: 2% 3%;
+  padding: 2% 3%;
+}
+
+.selected-activity-title {
+  display: flex;
+  justify-content: space-between;
+  color: rgba(50, 50, 50, 1);
+  border-bottom: 2px solid gray;
+}
+
+.selected-activity-title h3 {
+  color: rgba(50, 50, 50, 1);
+  margin: 0 0;
+}
+
+.selected-activity-summary-stats {
+  color: orange;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(50, 50, 50, 1);
+  padding: 2vh 1vh;
+  margin: 0 0vh;
+}
+
+.selected-activity-summary-stats h4 {
+  color: white;
+  font-weight: bold;
+  padding: 0 0;
+  margin: 0 0vh;
+}

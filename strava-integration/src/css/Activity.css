@@ -1,0 +1,14 @@
+.activity:hover {
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.selected {
+  color: black;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.selected:hover {
+  color: black;
+  background: rgba(255, 255, 255, 0.8);
+}

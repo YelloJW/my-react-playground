@@ -1,0 +1,22 @@
+.header {
+  margin: 0 2%;
+  padding: 0;
+}
+
+.header .title {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.header .picture {
+  opacity: 0;
+  background-color: gray;
+  border-radius: 5%;
+  height: 15vh;
+  width: auto;
+}
+
+.header .athlete {
+  margin: 0 auto;
+  padding: 0;
+}
