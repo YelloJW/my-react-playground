@@ -1,66 +1,73 @@
-import React from 'react';
-import authoriseApp from '../api/StravaAuth'
-import Dashboard from './Dashboard'
-import ActivityList from './ActivityList'
-import SelectedActivity from './SelectedActivity'
+import React from "react";
+import AuthoriseApp from "../api/AuthoriseApp";
+import Header from "./Header";
+import ActivityList from "./ActivityList";
+import SelectedActivity from "./SelectedActivity";
 
 class App extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      dashboardStats: [],
       activities: [],
-      selectedActivityId: null
+      selectedActivityId: null,
+      accessToken: "",
+      refreshToken: "",
+      user: {}
+    };
+  }
+
+  selectActivity = id => {
+    this.setState({
+      selectedActivityId: id
+    });
+  };
+
+  async sessionAuthorization() {
+    if (
+      sessionStorage.getItem("accessData") &&
+      sessionStorage.getItem("activities")
+    ) {
+      return {
+        accessData: JSON.parse(sessionStorage.getItem("accessData")),
+        activities: JSON.parse(sessionStorage.getItem("activities"))
+      };
+    } else {
+      return await AuthoriseApp();
     }
   }
 
-  selectActivity({id}) {
-    this.setState({
-      selectedActivityId: id
-    })
-  }
-
-  configActivities() {
-    this.state.activities.map((
-      { type, name, distance, elapsed_time, total_elevation_gain, id, start_date, start_latlng, achievement_count, kudos_count, average_speed }
-    ) => {
-      return(
-        <Activity
-          key={id}
-          startDate={start_date}
-          type={type}
-          name={name}
-          distance={distance}
-          elapsedTime={elapsed_time}
-          averageSpeed={average_speed}
-          totalElevationGain={total_elevation_gain}
-          achievementCount={achievement_count}
-          kudosCount={kudos_count}
-        >
-      )
-    })
-  }
-
   async componentDidMount() {
-    const activities = await authoriseApp()
+    const authResponse = await this.sessionAuthorization();
+    const { activities, accessData } = authResponse;
+    const { athlete } = accessData;
+    const { firstname, lastname, profile } = athlete;
     this.setState({
-      activities: activities
-      selectedActivity: activities[0].id
-    })
+      activities: activities,
+      selectedActivityId: activities[0].id,
+      accessToken: accessData.access_token,
+      refreshToken: accessData.refresh_token,
+      user: { firstname: firstname, lastname: lastname, picture: profile }
+    });
   }
 
   render() {
-    const activities = configActivities()
-    return(
-    <div>Hello Strava
-      <Dashboard />
-      <ActivityList activities={this.props.activities} selectActivity={this.selectActivity}/>
-      <SelectedActivity selectedActivityId={this.props.selectedActivityId}/>
-    </div>
-    )
+    return (
+      <div className="app">
+        <Header user={this.state.user} />
+        <div>
+          <ActivityList
+            activities={this.state.activities}
+            selectActivity={this.selectActivity}
+            selectedActivityId={this.state.selectedActivityId}
+          />
+          <SelectedActivity
+            id={this.state.selectedActivityId}
+            accessToken={this.state.accessToken}
+          />
+        </div>
+      </div>
+    );
   }
 }
 
-export default App
-
-
+export default App;
